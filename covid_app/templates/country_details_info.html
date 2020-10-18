@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <script>
+        window.onload = function () {
+            let data = [
+                        {% for item in cases_day %}
+                            {% set date = item.Date[:10].split("-") %}
+                            {x: new Date({{date[0]}},{{date[1]}},{{date[2]}}), y: {{item.Cases}}},
+                        {% endfor %}
+            ];
+            let title = "{{cases_day[0].Country}}"
+            renderChart(data, title);
+        }
+    </script>
+    <div id="chartContainer"></div>
+
+{% endblock %}
+

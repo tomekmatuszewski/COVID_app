@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3>Global information</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr class="table-active">
+                <td>Localization</td>
+                <td>New confirmed cases</td>
+                <td>Total confirmed cases</td>
+                <td>New deaths</td>
+                <td>Total deaths</td>
+                <td>New recovered</td>
+                <td>Total recovered</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="#">Global</a></td>
+                <td>{{ summary.Global.NewConfirmed }}</td>
+                <td>{{ summary.Global.TotalConfirmed }}</td>
+                <td>{{ summary.Global.NewDeaths }}</td>
+                <td>{{ summary.Global.TotalDeaths }}</td>
+                <td>{{ summary.Global.NewRecovered }}</td>
+                <td>{{ summary.Global.TotalRecovered }}</td>
+            </tr>
+                {% for country in summary.Countries %}
+                    <tr>
+                        <td><a href="{{ url_for('country_confirmed_cases', country_slug=country.Slug) }}">
+                            {{ country.Country }}</a>
+                        </td>
+                        <td>{{ country.NewConfirmed }}</td>
+                        <td>{{ country.TotalConfirmed }}</td>
+                        <td>{{ country.NewDeaths }}</td>
+                        <td>{{ country.TotalDeaths }}</td>
+                        <td>{{ country.NewRecovered }}</td>
+                        <td>{{ country.TotalRecovered }}</td>
+                    </tr>
+              {% endfor %}
+
+        </tbody>
+
+    </table>
+
+{% endblock %}

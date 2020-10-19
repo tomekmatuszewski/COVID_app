@@ -1,0 +1,81 @@
+html
+{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+article .article-metadata img
+{
+    float: left;
+    margin-left: 30px;
+}
+
+article .article-metadata h3
+{
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 70px;
+    text-align: center;
+}
+
+.title
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.charts canvas
+{
+    display: block;
+    margin-top: 50px;
+    width: 50vw;
+    height: 30vh;
+    float: left;
+}
+
+.table > tbody > tr > td
+{
+     vertical-align: middle;
+}
+
+.table > thead > tr > td
+{
+    vertical-align: middle;
+    text-align: left;
+    font-weight: bold;
+}
+
+.datas
+{
+    text-align: center;
+}
+
+.table .country_name
+{
+    width: 25%;
+    vertical-align: middle;
+}
+
+.table .country_name img
+{
+    display: block;
+    float: left;
+    margin-right: 20px;
+}
+
+.table .country_name a
+{
+    display: block;
+    margin-top: 20px;
+    vertical-align: middle;
+    text-decoration: none;
+    color: royalblue;
+}
+
+.world-emoji
+{
+    display: block;
+    float: left;
+    font-size: 40px;
+    margin-right: 35px;
+}

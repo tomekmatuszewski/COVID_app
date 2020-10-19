@@ -1,47 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
-    <h3>Summary current statistics</h3>
-    <table class="table table-bordered">
-        <thead>
-            <tr class="table-active">
-                <td>Country</td>
-                <td>New confirmed cases</td>
-                <td>Total confirmed cases</td>
-                <td>New deaths</td>
-                <td>Total deaths</td>
-                <td>New recovered</td>
-                <td>Total recovered</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="country_name"><a href="#">Global</a></td>
-                <td class="datas">{{ summary.Global.NewConfirmed | numberFormat }}</td>
-                <td class="datas">{{ summary.Global.TotalConfirmed | numberFormat }}</td>
-                <td class="datas">{{ summary.Global.NewDeaths | numberFormat }}</td>
-                <td class="datas">{{ summary.Global.TotalDeaths | numberFormat}}</td>
-                <td class="datas">{{ summary.Global.NewRecovered | numberFormat }}</td>
-                <td class="datas">{{ summary.Global.TotalRecovered | numberFormat }}</td>
-            </tr>
-                {% for country in summary.Countries %}
-                    <tr>
-                        <td class="country_name">
-                            <img src="https://www.countryflags.io/{{ country.CountryCode }}/shiny/64.png"/>
-                            <a href="{{ url_for('country_day_one_confirmed_cases', country_slug=country.Slug) }}">
-                            {{ country.Country }}
-                            </a>
-                        </td>
-                        <td class="datas">{{ country.NewConfirmed | numberFormat }}</td>
-                        <td class="datas">{{ country.TotalConfirmed | numberFormat }}</td>
-                        <td class="datas">{{ country.NewDeaths | numberFormat }}</td>
-                        <td class="datas">{{ country.TotalDeaths | numberFormat }}</td>
-                        <td class="datas">{{ country.NewRecovered | numberFormat }}</td>
-                        <td class="datas">{{ country.TotalRecovered | numberFormat }}</td>
-                    </tr>
-              {% endfor %}
+    <div class="title">
+        <h4> Summary for all countries </h4>
+    </div>
+    <article class="media content-section">
+        <table class="table table-bordered">
+            <thead>
+                <tr class="table-active">
+                    <td>Country</td>
+                    <td>New confirmed cases</td>
+                    <td>Total confirmed cases</td>
+                    <td>New deaths</td>
+                    <td>Total deaths</td>
+                    <td>New recovered</td>
+                    <td>Total recovered</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="country_name">
+                        <p class="world-emoji">&#127758;</p>
+                        <a href="#">Global</a>
+                    </td>
+                    <td class="datas">{{ summary.Global.NewConfirmed | numberFormat }}</td>
+                    <td class="datas">{{ summary.Global.TotalConfirmed | numberFormat }}</td>
+                    <td class="datas">{{ summary.Global.NewDeaths | numberFormat }}</td>
+                    <td class="datas">{{ summary.Global.TotalDeaths | numberFormat}}</td>
+                    <td class="datas">{{ summary.Global.NewRecovered | numberFormat }}</td>
+                    <td class="datas">{{ summary.Global.TotalRecovered | numberFormat }}</td>
+                </tr>
+                    {% for country in summary.Countries %}
+                        <tr>
+                            <td class="country_name">
+                                <img src="https://www.countryflags.io/{{ country.CountryCode }}/shiny/64.png"/>
+                                <a href="{{ url_for('country_day_one_cases', country_slug=country.Slug) }}">
+                                {{ country.Country }}
+                                </a>
+                            </td>
+                            <td class="datas">{{ country.NewConfirmed | numberFormat }}</td>
+                            <td class="datas">{{ country.TotalConfirmed | numberFormat }}</td>
+                            <td class="datas">{{ country.NewDeaths | numberFormat }}</td>
+                            <td class="datas">{{ country.TotalDeaths | numberFormat }}</td>
+                            <td class="datas">{{ country.NewRecovered | numberFormat }}</td>
+                            <td class="datas">{{ country.TotalRecovered | numberFormat }}</td>
+                        </tr>
+                  {% endfor %}
 
-        </tbody>
+            </tbody>
 
     </table>
-
+    </article>
 {% endblock %}

@@ -1,23 +1,71 @@
 {% extends "base.html" %}
-
 {% block content %}
-    <div class="media content-section">
+    <article class="media content-section">
         <div class="media-body">
-            <div id="chartContainer"></div>
+            <div class="article-metadata">
+                <img src="https://www.countryflags.io/{{ code }}/shiny/64.png"/>
+                <h3 class="article-title"> {{ title }} -  Total Cases, Deaths, Recovered from the first recorded case </h3>
+            </div>
+            <div class="article-content">
+                <div class="charts">
+                    <canvas id="chart-cases-confirmed"></canvas>
+                    <canvas id="chart-deaths"></canvas>
+                    <canvas id="chart-recovered"></canvas>
+                </div>
+            </div>
         </div>
+    </article>
+
+    <div class="bootstrap-iso">
+     <div class="container-fluid">
+      <div class="row">
+       <div class="col-md-6 col-sm-6 col-xs-12">
+
+        <!-- Form code begins -->
+        <form method="post">
+          <div class="form-group"> <!-- Date input -->
+            <label class="control-label" for="date">Date</label>
+            <input class="form-control" id="date" name="date" placeholder="YYYY-MM-DD" type="text"/>
+          </div>
+          <div class="form-group"> <!-- Submit button -->
+            <button class="btn btn-primary " name="submit" type="submit">Submit</button>
+          </div>
+        </form>
+         <!-- Form code ends -->
+
+        </div>
+      </div>
+     </div>
     </div>
 
-<script>
-        window.onload = function () {
-            let data = [
-                        {% for item in cases_day %}
-                            {% set date = item.Date[:10].split("-") %}
-                            {x: new Date({{date[0]}},{{date[1]}},{{date[2]}}), y: {{item.Cases}}},
-                        {% endfor %}
-            ];
-            let title = "{{cases_day[0].Country}}";
-            renderChart(data, title);
-        }
-</script>
+
+    <script>
+        let dates = [
+            {% for item in cases_day %}
+                '{{ item.Date[:10] }}',
+            {% endfor %}
+        ];
+        let cases = [
+            {% for item in cases_day %}
+                {{ item.Cases }},
+            {% endfor %}
+        ];
+        let deaths = [
+            {% for item in deaths %}
+                {{ item.Cases }},
+            {% endfor %}
+        ]
+        let recovered = [
+            {% for item in recovered %}
+                {{ item.Cases }},
+            {% endfor %}
+        ]
+        let chart_title_cases = 'Total covid cases ' + '{{ title }}';
+        let chart_title_deaths = 'Total deaths ' + '{{ title }}';
+        let chart_title_recovered = 'Total recovered ' + '{{ title }}';
+        drawChart('chart-cases-confirmed', dates, cases, chart_title_cases);
+        drawChart('chart-deaths', dates, deaths, chart_title_deaths);
+        drawChart('chart-recovered', dates, recovered, chart_title_recovered);
+    </script>
 {% endblock %}
 

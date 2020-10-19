@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-    <h3>Global information</h3>
+    <h3>Summary current statistics</h3>
     <table class="table table-bordered">
         <thead>
             <tr class="table-active">
-                <td>Localization</td>
+                <td>Country</td>
                 <td>New confirmed cases</td>
                 <td>Total confirmed cases</td>
                 <td>New deaths</td>
@@ -15,25 +15,28 @@
         </thead>
         <tbody>
             <tr>
-                <td><a href="#">Global</a></td>
-                <td>{{ summary.Global.NewConfirmed }}</td>
-                <td>{{ summary.Global.TotalConfirmed }}</td>
-                <td>{{ summary.Global.NewDeaths }}</td>
-                <td>{{ summary.Global.TotalDeaths }}</td>
-                <td>{{ summary.Global.NewRecovered }}</td>
-                <td>{{ summary.Global.TotalRecovered }}</td>
+                <td class="country_name"><a href="#">Global</a></td>
+                <td class="datas">{{ summary.Global.NewConfirmed | numberFormat }}</td>
+                <td class="datas">{{ summary.Global.TotalConfirmed | numberFormat }}</td>
+                <td class="datas">{{ summary.Global.NewDeaths | numberFormat }}</td>
+                <td class="datas">{{ summary.Global.TotalDeaths | numberFormat}}</td>
+                <td class="datas">{{ summary.Global.NewRecovered | numberFormat }}</td>
+                <td class="datas">{{ summary.Global.TotalRecovered | numberFormat }}</td>
             </tr>
                 {% for country in summary.Countries %}
                     <tr>
-                        <td><a href="{{ url_for('country_confirmed_cases', country_slug=country.Slug) }}">
-                            {{ country.Country }}</a>
+                        <td class="country_name">
+                            <img src="https://www.countryflags.io/{{ country.CountryCode }}/shiny/64.png"/>
+                            <a href="{{ url_for('country_day_one_confirmed_cases', country_slug=country.Slug) }}">
+                            {{ country.Country }}
+                            </a>
                         </td>
-                        <td>{{ country.NewConfirmed }}</td>
-                        <td>{{ country.TotalConfirmed }}</td>
-                        <td>{{ country.NewDeaths }}</td>
-                        <td>{{ country.TotalDeaths }}</td>
-                        <td>{{ country.NewRecovered }}</td>
-                        <td>{{ country.TotalRecovered }}</td>
+                        <td class="datas">{{ country.NewConfirmed | numberFormat }}</td>
+                        <td class="datas">{{ country.TotalConfirmed | numberFormat }}</td>
+                        <td class="datas">{{ country.NewDeaths | numberFormat }}</td>
+                        <td class="datas">{{ country.TotalDeaths | numberFormat }}</td>
+                        <td class="datas">{{ country.NewRecovered | numberFormat }}</td>
+                        <td class="datas">{{ country.TotalRecovered | numberFormat }}</td>
                     </tr>
               {% endfor %}
 

@@ -1,41 +1,71 @@
 {% extends "base.html" %}
 {% block content %}
-    <article class="media content-section">
-        <div class="media-body">
-            <div class="article-metadata">
-                <img src="https://www.countryflags.io/{{ code }}/shiny/64.png"/>
-                <h3 class="article-title"> {{ title }} -  Total Cases, Deaths, Recovered from the first recorded case </h3>
-            </div>
-            <div class="article-content">
-                <div class="charts">
-                    <canvas id="chart-cases-confirmed"></canvas>
-                    <canvas id="chart-deaths"></canvas>
-                    <canvas id="chart-recovered"></canvas>
-                </div>
-            </div>
+
+    <div class="country-header">
+        <img id="country-img" src="https://www.countryflags.io/{{ code }}/shiny/64.png"/>
+        <h3 class="article-title"> {{ title }} -  Total Cases, Deaths, Recovered from the first recorded case </h3>
+    </div>
+
+    <div class="country-info">
+        <div class="summary-info-table">
+            {% for country in countries.Countries %}
+                {%  if country.Slug == slug %}
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td>Status as of the date</td>
+                                <td>{{ country.Date[:10] }}</td>
+                            </tr>
+                            <tr>
+                                <td>New confirmed case</td>
+                                <td>{{ country.NewConfirmed }}</td>
+                            </tr>
+                            <tr>
+                                <td>Total confirmed cases</td>
+                                <td>{{ country.TotalConfirmed }}</td>
+                            </tr>
+                            <tr>
+                                <td>Total confirmed cases</td>
+                                <td>{{ country.TotalConfirmed }}</td>
+                            </tr>
+                            <tr>
+                                <td>New deaths</td>
+                                <td>{{ country.NewDeaths }}</td>
+                            </tr>
+                            <tr>
+                                <td>Total deaths</td>
+                                <td>{{ country.TotalDeaths }}</td>
+                            </tr>
+                            <tr>
+                                <td>New recovered</td>
+                                <td>{{ country.NewRecovered }}</td>
+                            </tr>
+                            <tr>
+                                <td>Total recovered</td>
+                                <td>{{ country.TotalRecovered }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                {% endif %}
+            {% endfor %}
         </div>
-    </article>
 
-    <div class="bootstrap-iso">
-     <div class="container-fluid">
-      <div class="row">
-       <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class='date-picker'>
 
-        <!-- Form code begins -->
-        <form method="post">
-          <div class="form-group"> <!-- Date input -->
-            <label class="control-label" for="date">Date</label>
-            <input class="form-control" id="date" name="date" placeholder="YYYY-MM-DD" type="text"/>
-          </div>
-          <div class="form-group"> <!-- Submit button -->
-            <button class="btn btn-primary " name="submit" type="submit">Submit</button>
-          </div>
-        </form>
-         <!-- Form code ends -->
+                <label for="datepicker">Select start date</label>
+                <input type='date' class="form-control" id='start_date'/>
+                <label for="datepicker2">Select end date</label>
+                <input type='date' class="form-control" id='end_date'/>
+                <input class="btn btn-success" type="button" onclick="country_start_end();" value="Confirm Dates"/>
+                <a class="btn btn-primary" href="" id="start_end" target="_blank">Show charts for selected period</a>
 
         </div>
-      </div>
-     </div>
+    </div>
+
+    <div class="charts">
+        <canvas id="chart-cases-confirmed"></canvas>
+        <canvas id="chart-deaths"></canvas>
+        <canvas id="chart-recovered"></canvas>
     </div>
 
 
@@ -66,6 +96,8 @@
         drawChart('chart-cases-confirmed', dates, cases, chart_title_cases);
         drawChart('chart-deaths', dates, deaths, chart_title_deaths);
         drawChart('chart-recovered', dates, recovered, chart_title_recovered);
+
+
     </script>
 {% endblock %}
 

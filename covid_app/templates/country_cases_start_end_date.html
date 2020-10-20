@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    <div class="country-header">
+        <img id="country-img" src="https://www.countryflags.io/{{ code }}/shiny/64.png"/>
+        <h3 class="article-title"> {{ country }} stats for period: {{ start_date }} to {{ end_date }} </h3>
+    </div>
+
+    <div class="charts">
+        <canvas id="chart-cases-confirmed"></canvas>
+        <canvas id="chart-deaths"></canvas>
+        <canvas id="chart-recovered"></canvas>
+    </div>
+
+
+
+
+    <script>
+        let dates = [
+            {% for item in cases %}
+                '{{ item.Date[:10] }}',
+            {% endfor %}
+        ];
+        let cases = [
+            {% for item in cases %}
+                {{ item.Cases }},
+            {% endfor %}
+        ];
+        let deaths = [
+            {% for item in deaths %}
+                {{ item.Cases }},
+            {% endfor %}
+        ]
+        let recovered = [
+            {% for item in recovered %}
+                {{ item.Cases }},
+            {% endfor %}
+        ]
+        let chart_title_cases = 'Covid cases ' + '{{ title }}' + ' from ' + '{{ start_date }}' + ' to ' + '{{ end_date }}';
+        let chart_title_deaths = 'Deaths ' + '{{ title }}' + ' from ' + '{{ start_date }}' + ' to ' + '{{ end_date }}';
+        let chart_title_recovered = 'Recovered ' + '{{ title }}' + ' from ' + '{{ start_date }}' + ' to ' + '{{ end_date }}';
+        drawChart('chart-cases-confirmed', dates, cases, chart_title_cases);
+        drawChart('chart-deaths', dates, deaths, chart_title_deaths);
+        drawChart('chart-recovered', dates, recovered, chart_title_recovered);
+
+
+    </script>
+{% endblock %}

@@ -1,20 +1,26 @@
-html
+html, body
 {
     font-family: 'Roboto Condensed', sans-serif;
+    background-color: #fcfaf9;
 }
 
-article .article-metadata img
+.container
+{
+
+}
+
+article table img
 {
     float: left;
-    margin-left: 30px;
+    margin-left: 20px;
+    display: inline-block;
 }
 
-article .article-metadata h3
+
+.summary-title
 {
-    display: inline-block;
-    margin-top: 15px;
-    margin-left: 70px;
-    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    margin-bottom: 30px;
 }
 
 .title
@@ -24,30 +30,24 @@ article .article-metadata h3
     text-align: center;
 }
 
-.charts canvas
-{
-    display: block;
-    margin-top: 50px;
-    width: 50vw;
-    height: 30vh;
-    float: left;
-}
 
 .table > tbody > tr > td
 {
      vertical-align: middle;
 }
 
-.table > thead > tr > td
+.country
 {
-    vertical-align: middle;
     text-align: left;
     font-weight: bold;
+    vertical-align: middle;
 }
 
 .datas
 {
     text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
 }
 
 .table .country_name
@@ -60,7 +60,7 @@ article .article-metadata h3
 {
     display: block;
     float: left;
-    margin-right: 20px;
+    margin-right: 50px;
 }
 
 .table .country_name a
@@ -77,5 +77,81 @@ article .article-metadata h3
     display: block;
     float: left;
     font-size: 40px;
-    margin-right: 35px;
+    margin-right: 50px;
+    margin-left: 35px;
+}
+
+
+
+/*styling country details*/
+
+.country-info
+{
+    clear: both;
+    float: left;
+}
+
+.country-info .summary-info-table
+{
+    margin-top: 30px;
+    border: #c8cbcb 1px solid;
+    margin-bottom: 30px;
+}
+
+.date-picker
+{
+    border: #c8cbcb 1px solid;
+    padding: 20px;
+}
+
+.date-picker input
+{
+    width: 200px;
+}
+
+.date-picker input[type=button]
+{
+    display: block;
+    margin-top: 20px !important;
+}
+
+.date-picker a
+{
+    margin-top: 20px;
+}
+
+.country-header
+{
+    text-align: center;
+}
+
+#country-img
+{
+    display: inline-block;
+    float: left;
+}
+
+.country-header h3
+{
+    display: inline-block;
+    font-family: 'Bebas Neue', cursive;
+    margin-top: 20px;
+}
+
+.charts
+{
+    width: 75%;
+    float: right;
+}
+
+
+.charts canvas
+{
+    margin-top: 20px;
+}
+
+.table .table-hover
+{
+    width: 100%;
+    margin: auto;
 }

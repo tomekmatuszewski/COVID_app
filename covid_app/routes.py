@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 
 app = Flask(__name__, static_folder='static')
@@ -10,6 +10,9 @@ ENDPOINTS = {
     'confirmed_cases': "/dayone/country/{}/status/confirmed",
     'deaths': "/dayone/country/{}/status/deaths",
     'recovered': "/dayone/country/{}/status/recovered",
+    'cases_start_end': "/country/{}/status/confirmed?from={}T00:00:00Z&to={}T00:00:00Z",
+    'recovered_start_end': "/country/{}/status/recovered?from={}T00:00:00Z&to={}T00:00:00Z",
+    'deaths_start_end': "/country/{}/status/deaths?from={}T00:00:00Z&to={}T00:00:00Z",
 }
 
 
@@ -26,15 +29,25 @@ def country_day_one_cases(country_slug):
     recovered = requests.get(COVID_API_URL + ENDPOINTS['recovered'].format(country_slug)).json()
     title = cases_day[0]['Country']
     country_code = cases_day[0]['CountryCode']
+    summary = requests.get(COVID_API_URL + ENDPOINTS['summary']).json()
     return render_template("country_day_one_confirmed_cases.html", cases_day=cases_day,
-                           title=title, code=country_code, deaths=deaths, recovered=recovered)
+                           title=title, code=country_code, deaths=deaths, recovered=recovered, slug=country_slug,
+                           countries=summary)
 
 
-@app.route("/covid/country/<country_slug>/<start_date>/<end_date>")
+@app.route("/covid/<country_slug>/<start_date>/<end_date>")
 def country_start_end_date_cases(country_slug, start_date, end_date):
-    path = COVID_API_URL + f"/country/{country_slug}/status/confirmed?from={start_date}T00:00:00Z&to={end_date}T00:00:00Z"
-    cases = requests.get(path).json()
-    return render_template("country_start_end_cases.html", cases=cases)
+
+    cases = requests.get(COVID_API_URL +
+                         ENDPOINTS['cases_start_end'].format(country_slug, start_date, end_date)).json()
+    recovered = requests.get(COVID_API_URL +
+                             ENDPOINTS['recovered_start_end'].format(country_slug, start_date, end_date)).json()
+    deaths = requests.get(COVID_API_URL +
+                          ENDPOINTS['deaths_start_end'].format(country_slug, start_date, end_date)).json()
+    country_code = cases[0]["CountryCode"]
+    return render_template("country_cases_start_end_date.html", cases=cases, country=country_slug, start_date=start_date,
+                           end_date=end_date, deaths=deaths, recovered=recovered, code=country_code)
+
 
 @app.template_filter()
 def numberFormat(value):

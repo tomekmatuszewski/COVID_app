@@ -89,6 +89,7 @@ article table img
 {
     clear: both;
     float: left;
+    width: 22%;
 }
 
 .country-info .summary-info-table
@@ -96,17 +97,28 @@ article table img
     margin-top: 30px;
     border: #c8cbcb 1px solid;
     margin-bottom: 30px;
+    font-size: 14px;
 }
 
 .date-picker
 {
     border: #c8cbcb 1px solid;
     padding: 20px;
+    font-size: 14px;
+}
+
+.date-picker label
+{
+    margin-top: 10px;
+    margin-left: 15px;
+    display: block;
 }
 
 .date-picker input
 {
-    width: 200px;
+    width: 180px;
+    display: block;
+    margin: auto;
 }
 
 .date-picker input[type=button]
@@ -154,4 +166,27 @@ article table img
 {
     width: 100%;
     margin: auto;
+}
+
+.country-header .btn
+{
+    display: block;
+    float: right;
+    margin-top: 15px;
+}
+
+/*styling charts for start to end date*/
+
+.charts-start-stop
+{
+    width: 100%;
+
+}
+
+.charts-start-stop canvas
+{
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 50px;
+
 }

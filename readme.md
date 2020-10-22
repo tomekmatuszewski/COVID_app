@@ -18,10 +18,15 @@ Steps:
     
     Select country and check actually situation:
     
+![screen1](readme_screens/screen3.png)
+
+Charts - cases, deaths, recovered
+   
 ![screen1](readme_screens/screen1.png)
 
     You can check data for particular period
     
-![screen1](readme_screens/screen1.png)
+    
+![screen1](readme_screens/screen2.png)
 
     

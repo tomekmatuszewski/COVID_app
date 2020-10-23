@@ -13,6 +13,9 @@ Data collected from:
     
 Steps: 
 
+    - clone repo into your directory
+    - create virtual enviroment - e.g. -> virtaulenv venv
+    - source venv/bin/activate
     - pip install -r requirements.txt
     - python run.py
     - http://127.0.0.1:5000/covid/summary

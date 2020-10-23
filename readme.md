@@ -15,7 +15,7 @@ Steps:
 
     - pip install -r requirements.txt
     - python run.py
-    - http://http://127.0.0.1:5000/covid/summary
+    - http://127.0.0.1:5000/covid/summary
     
 Select country and check actually situation:
     

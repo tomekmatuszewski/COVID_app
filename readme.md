@@ -3,7 +3,7 @@
 Flask app gathering information about actually 
 COVID 19 situation
 
-###  Flask, Bootstrap, JavaScript with Canvas
+###  Flask, Bootstrap, JavaScript with ChartJs
 
 
 
